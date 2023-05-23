@@ -1,0 +1,64 @@
+.frm {
+  box-sizing: border-box;
+  width: 70vw;
+  margin-left: 15vw;
+  padding: 3em;
+  margin-top: 5vh;
+  border-radius: 35px;
+  text-align: center;
+  background-color: rgba(255, 2, 158, 0.842);
+}
+
+.label {
+  display: block;
+  font-size: larger;
+  color: white;
+  padding: 5px;
+}
+
+.input {
+  font-size: larger;
+  padding: 5px;
+  width: 70%;
+  margin: 2px;
+  background-color: wheat;
+}
+
+.btn {
+  color: white;
+  background-color: red;
+  border-radius: 15px;
+  font-size: larger;
+  display: block;
+  padding: 8px;
+  margin: 30px auto;
+  width: 60%;
+}
+
+.btn:hover {
+  background-color: limegreen;
+  box-shadow: 5px 5px 5px aqua;
+}
+
+.messages {
+  display: flex;
+  justify-content: center;
+}
+
+.error {
+  display: block;
+  background-color: red;
+  color: white;
+  width: 70%;
+  /* height: 50px; */
+  padding: 5px;
+}
+
+.success {
+  display: block;
+  background-color: lightblue;
+  color: black;
+  width: 70%;
+  /* height: 50px; */
+  padding: 5px;
+}

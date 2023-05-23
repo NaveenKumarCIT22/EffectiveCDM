@@ -1,4 +1,15 @@
-:root {
+body {
+  height: 100vh;
+  background: linear-gradient(
+    -35deg,
+    rgb(17, 45, 45),
+    rgb(9, 38, 35),
+    rgb(10, 31, 32)
+  );
+  color: whitesmoke;
+}
+
+/* root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
@@ -12,9 +23,9 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
-}
+} */
 
-a {
+/* :a {
   font-weight: 500;
   color: #646cff;
   text-decoration: inherit;
@@ -66,4 +77,4 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
-}
+} */
