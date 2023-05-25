@@ -62,3 +62,12 @@
   /* height: 50px; */
   padding: 5px;
 }
+
+.Link {
+  color: aquamarine;
+}
+
+.Link:hover {
+  color: yellow;
+  text-decoration: dotted;
+}

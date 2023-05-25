@@ -2,13 +2,18 @@ import Form from "../components/Form";
 import Header from "../components/Header";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./authPage.css";
+import React from "react";
 
-const LoginPage = () => {
+interface frmProps {
+  type: "signin" | "signup";
+}
+
+const LoginPage: React.FC<frmProps> = ({ type }) => {
   return (
     <>
       <Header title="EffectiveCDM" mode="empty" />
       <div className="frm">
-        <Form type="signin" />
+        <Form type={type} />
       </div>
     </>
   );

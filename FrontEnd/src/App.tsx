@@ -11,15 +11,18 @@ import Footer from "./components/Footer";
 function App() {
   return (
     <>
+      {/* <Router> */}
       <Routes>
         {/* <Route path="/" element={<ViewPage />} />
       <Route path="/view" element={<ViewPage />} /> */}
-        <Route path="/login" element={<LoginPage />} />
+        <Route path="/login" element={<LoginPage type="signin" />} />
+        <Route path="/register" element={<LoginPage type="signup" />} />
         {/* <Route path="/add" element={<AddPage />} />
       <Route path="/modify" element={<ModifyPage />} />
       <Route path="/Profile/:usrid" element={<ProfilePage />} /> */}
       </Routes>
       <Footer />
+      {/* </Router> */}
     </>
   );
 }
