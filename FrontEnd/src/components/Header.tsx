@@ -44,10 +44,10 @@ const Header: React.FC<HeaderProps> = ({ title, mode }) => {
             className="justify-content-end"
           >
             <Nav className="justify-content-end">
-              <Nav.Link href="#features">&nbsp;Add&nbsp;</Nav.Link>
-              <Nav.Link href="#home">&nbsp;Modify&nbsp;</Nav.Link>
-              <Nav.Link href="#features">&nbsp;View&nbsp;</Nav.Link>
-              <Nav.Link href="#pricing">&nbsp;Profile&nbsp;</Nav.Link>
+              <Nav.Link href="/add">&nbsp;Add&nbsp;</Nav.Link>
+              <Nav.Link href="/modify">&nbsp;Modify&nbsp;</Nav.Link>
+              <Nav.Link href="/view">&nbsp;View&nbsp;</Nav.Link>
+              <Nav.Link href="/profile">&nbsp;Profile&nbsp;</Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>

@@ -1,8 +1,8 @@
 import { useState, MouseEvent, KeyboardEvent, ChangeEvent } from "react";
 import React from "react";
-import { Link, Router } from "react-router-dom";
+import { Link, Router, useParams } from "react-router-dom";
 interface frmProps {
-  type: "signin" | "signup";
+  type: "signin" | "signup" | "profile";
 }
 
 const Form: React.FC<frmProps> = ({ type }) => {
@@ -275,6 +275,35 @@ const Form: React.FC<frmProps> = ({ type }) => {
           </label>
         </form>
       </div>
+    );
+  } else if (type == "profile") {
+    const { usrid } = useParams();
+    return (
+      <>
+        <form>
+          <h1>Profile</h1>
+          <label htmlFor="name" className="label">
+            Name:
+          </label>
+          <input
+            type="text"
+            id="name"
+            value={`Company ${usrid}`}
+            disabled
+            style={{ backgroundColor: "whitesmoke" }}
+          />
+          <label htmlFor="email" className="label">
+            Email:
+          </label>
+          <input
+            type="email"
+            id="email"
+            value={"Company@email.net"}
+            disabled
+            style={{ backgroundColor: "whitesmoke" }}
+          />
+        </form>
+      </>
     );
   }
 };
