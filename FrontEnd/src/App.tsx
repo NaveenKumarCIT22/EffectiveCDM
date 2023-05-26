@@ -7,6 +7,7 @@ import Footer from "./components/Footer";
 import ModifyPage from "./pages/ModifyPage";
 import ProfilePage from "./pages/ProfilePage";
 import ViewPage from "./pages/ViewPage";
+import NotFound from "./pages/NotFoundPage";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/add" element={<AddPage />} />
         <Route path="/modify" element={<ModifyPage />} />
         <Route path="/profile/:usrid" element={<ProfilePage />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />
       {/* </Router> */}

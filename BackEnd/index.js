@@ -41,6 +41,18 @@ app.post("/usrslgninfo", (req, res) => {
   });
 });
 
+app.get("/usrslgninfo/:name", (req, res) => {
+  const nme = req.params.name;
+  const q = "SELECT * FROM usertb  WHERE name=?";
+  db.query(q, [nme], (err, data) => {
+    if (err) {
+      console.log(err);
+      return res.json(err);
+    }
+    return res.json(data);
+  });
+});
+
 app.listen(8800, () => {
   console.log("Connected to the Backend Server!");
 });

@@ -14,6 +14,7 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({ title, mode }) => {
+  const usr = sessionStorage.getItem("ActiveUsr");
   if (mode == "landing")
     return (
       <Navbar style={navStyle} variant="dark" fixed="top" expand="lg">
@@ -47,7 +48,7 @@ const Header: React.FC<HeaderProps> = ({ title, mode }) => {
               <Nav.Link href="/add">&nbsp;Add&nbsp;</Nav.Link>
               <Nav.Link href="/modify">&nbsp;Modify&nbsp;</Nav.Link>
               <Nav.Link href="/view">&nbsp;View&nbsp;</Nav.Link>
-              <Nav.Link href="/profile">&nbsp;Profile&nbsp;</Nav.Link>
+              <Nav.Link href={"/profile/" + usr}>&nbsp;{usr}&nbsp;</Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>

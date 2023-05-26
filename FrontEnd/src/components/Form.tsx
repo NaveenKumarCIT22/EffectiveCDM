@@ -6,6 +6,12 @@ interface frmProps {
   type: "signin" | "signup" | "profile";
 }
 
+interface usrProps {
+  name: string;
+  password: string;
+  email: string;
+}
+
 const Form: React.FC<frmProps> = ({ type }) => {
   const navigate = useNavigate();
   if (type == "signin") {
@@ -53,12 +59,6 @@ const Form: React.FC<frmProps> = ({ type }) => {
       setPassword(e.target.value);
       setSubmitted(false);
     };
-
-    interface usrProps {
-      name: string;
-      password: string;
-      email: string;
-    }
 
     // Handling the form submission
     const handleSubmit = (e: MouseEvent) => {
@@ -337,6 +337,32 @@ const Form: React.FC<frmProps> = ({ type }) => {
     );
   } else if (type == "profile") {
     const { usrid } = useParams();
+    const [users, setUsers] = useState([]);
+    if (sessionStorage.getItem("ActiveUsr") == usrid) {
+      useEffect(() => {
+        const fetchUser = async () => {
+          try {
+            const res = await axios.get(
+              `http://localhost:8800/usrslgninfo/${usrid}`
+            );
+            setUsers(res.data);
+            console.log(users);
+          } catch (err) {
+            console.log(err);
+          }
+        };
+        fetchUser();
+      }, []);
+      var usrnme = "";
+      var usrmail = "";
+      users.forEach((user: usrProps) => {
+        usrnme = user.name;
+        usrmail = user.email;
+      });
+    } else {
+      var usrnme = "Not Authorised";
+      var usrmail = "Not Authorised";
+    }
     return (
       <>
         <form>
@@ -348,7 +374,7 @@ const Form: React.FC<frmProps> = ({ type }) => {
             type="text"
             id="name"
             className="input"
-            value={`Company ${usrid}`}
+            value={usrnme}
             disabled
             style={{ backgroundColor: "whitesmoke" }}
           />
@@ -359,7 +385,7 @@ const Form: React.FC<frmProps> = ({ type }) => {
             type="email"
             id="email"
             className="input"
-            value={"Company@email.net"}
+            value={usrmail}
             disabled
             style={{ backgroundColor: "whitesmoke" }}
           />

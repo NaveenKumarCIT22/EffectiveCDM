@@ -14,10 +14,12 @@ const ProfilePage = () => {
     }, []);
   };
 
+  const usr = sessionStorage.getItem("ActiveUsr");
+
   return (
     <>
       <Header title="EffectiveCDM" mode="main" />
-      {sessionStorage.getItem("ActiveUsr") == null ? (
+      {usr == null ? (
         redirect()
       ) : (
         <div className="frm">
