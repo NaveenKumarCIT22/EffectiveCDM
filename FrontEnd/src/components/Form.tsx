@@ -288,6 +288,7 @@ const Form: React.FC<frmProps> = ({ type }) => {
           <input
             type="text"
             id="name"
+            className="input"
             value={`Company ${usrid}`}
             disabled
             style={{ backgroundColor: "whitesmoke" }}
@@ -298,6 +299,7 @@ const Form: React.FC<frmProps> = ({ type }) => {
           <input
             type="email"
             id="email"
+            className="input"
             value={"Company@email.net"}
             disabled
             style={{ backgroundColor: "whitesmoke" }}
