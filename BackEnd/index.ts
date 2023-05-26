@@ -1,5 +1,6 @@
 import express from "express";
 import mysql from "mysql";
+import cors from "cors";
 import auth from "./pwd.json" assert { type: "json" };
 
 const app = express();
@@ -10,6 +11,9 @@ const db = mysql.createConnection({
   password: auth.pass,
   database: "ecdm_db",
 });
+
+app.use(express.json());
+app.use(cors());
 
 app.get("/", (req, res) => {
   res.json("ECDM Backend Online...");
