@@ -1,12 +1,28 @@
-import { useState, MouseEvent, KeyboardEvent, ChangeEvent } from "react";
+import { useState, MouseEvent, ChangeEvent, useEffect } from "react";
 import React from "react";
-import { Link, Router, useParams } from "react-router-dom";
+import axios from "axios";
+import { Link, useParams, useNavigate, Navigate } from "react-router-dom";
 interface frmProps {
   type: "signin" | "signup" | "profile";
 }
 
 const Form: React.FC<frmProps> = ({ type }) => {
+  const navigate = useNavigate();
   if (type == "signin") {
+    const [users, setUsers] = useState([]);
+
+    useEffect(() => {
+      const fetchAllBooks = async () => {
+        try {
+          const res = await axios.get("http://localhost:8800/usrslgninfo");
+          setUsers(res.data);
+          console.log(users);
+        } catch (err) {
+          console.log(err);
+        }
+      };
+      fetchAllBooks();
+    }, []);
     // States for Login
     const [name, setName] = useState("");
     // const [email, setEmail] = useState("");
@@ -38,15 +54,29 @@ const Form: React.FC<frmProps> = ({ type }) => {
       setSubmitted(false);
     };
 
+    interface usrProps {
+      name: string;
+      password: string;
+      email: string;
+    }
+
     // Handling the form submission
     const handleSubmit = (e: MouseEvent) => {
       e.preventDefault();
       if (name === "" || password === "") {
         setError(true);
       } else {
-        setSubmitted(true);
         setError(false);
         setErrorPrompt("Please enter all the fields.");
+        console.log(name, password);
+        users.forEach((user: usrProps) => {
+          if (name == user.name && password == user.password) {
+            console.log(user);
+            setSubmitted(true);
+            navigate("/");
+            sessionStorage.setItem("ActiveUsr", name);
+          }
+        });
       }
     };
 
@@ -137,6 +167,11 @@ const Form: React.FC<frmProps> = ({ type }) => {
       </div>
     );
   } else if (type == "signup") {
+    const [user, setUser] = useState({
+      name: "",
+      email: "",
+      password: "",
+    });
     // States for Login
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
@@ -154,14 +189,16 @@ const Form: React.FC<frmProps> = ({ type }) => {
       setName(e.target.value);
       setSubmitted(false);
       console.log(e.target);
+      handleChange(e);
     };
 
     // Handling the email change
-    const handleEmail = (e) => {
+    const handleEmail = (e: ChangeEvent) => {
       setEmail(e.target.value);
       if (email.includes("@") && email.includes(".")) {
         setSubmitted(false);
         setError(false);
+        handleChange(e);
       } else {
         setError(true);
         setErrorPrompt("Please Enter Valid Email.");
@@ -172,6 +209,12 @@ const Form: React.FC<frmProps> = ({ type }) => {
     const handlePassword = (e: ChangeEvent) => {
       setPassword(e.target.value);
       setSubmitted(false);
+      handleChange(e);
+    };
+
+    const handleChange = (e: ChangeEvent) => {
+      setUser((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+      console.log(e.target);
     };
 
     // Handling the form submission
@@ -183,6 +226,19 @@ const Form: React.FC<frmProps> = ({ type }) => {
         setSubmitted(true);
         setError(false);
         setErrorPrompt("Please enter all the fields.");
+        handleClick(e);
+      }
+    };
+
+    const handleClick = async (e: MouseEvent) => {
+      e.preventDefault();
+      try {
+        await axios.post("http://localhost:8800/usrslgninfo", user);
+        navigate("/");
+        sessionStorage.setItem("ActiveUsr", name);
+      } catch (err) {
+        console.log(err);
+        setError(true);
       }
     };
 
@@ -232,6 +288,7 @@ const Form: React.FC<frmProps> = ({ type }) => {
           <input
             onChange={handleName}
             className="input"
+            name="name"
             value={name}
             type="text"
             placeholder="Enter Company Name"
@@ -241,6 +298,7 @@ const Form: React.FC<frmProps> = ({ type }) => {
           <input
             onChange={handleEmail}
             className="input"
+            name="email"
             value={email}
             type="email"
             placeholder="Enter Company Mail"
@@ -250,6 +308,7 @@ const Form: React.FC<frmProps> = ({ type }) => {
           <input
             onChange={handlePassword}
             className="input"
+            name="password"
             value={password}
             type="password"
             placeholder="Enter Password"
@@ -307,6 +366,8 @@ const Form: React.FC<frmProps> = ({ type }) => {
         </form>
       </>
     );
+  } else {
+    return <></>;
   }
 };
 

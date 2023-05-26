@@ -65,6 +65,7 @@ input[type="date"] {
 
 #datatable {
   width: 100%;
+  overflow-x: scroll;
 }
 
 #datatable,
@@ -93,6 +94,7 @@ input[type="date"] {
   left: 5%;
   right: 5%;
   gap: 10px;
+  /* overflow: hidden; */
 }
 
 /* form {
