@@ -65,7 +65,13 @@ input[type="date"] {
 
 #datatable {
   width: 100%;
-  overflow-x: scroll;
+  /* overflow: scroll;
+  height: 10px; */
+}
+
+.dataarea {
+  overflow: auto;
+  height: 190px;
 }
 
 #datatable,

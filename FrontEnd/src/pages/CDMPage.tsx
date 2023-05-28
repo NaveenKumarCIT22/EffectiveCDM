@@ -1,12 +1,55 @@
-import React from "react";
+import React, { ChangeEvent, MouseEvent, useEffect, useState } from "react";
 import "./CDMStyle.css";
+import axios from "axios";
+// import ReactDOM from "react-dom/client";
+import AddData from "../components/AddData";
+// import { useNavigate } from "react-router-dom";
 
 interface cdmProps {
   mode: "add" | "modify" | "view";
 }
 
 const CDMPage: React.FC<cdmProps> = ({ mode }) => {
+  const [data, setData] = useState({
+    name: "",
+    phno: "",
+    email: "",
+    product: "",
+    city: "",
+    country: "",
+    remarks: "",
+    expiry: "",
+  });
+  interface dataObj {
+    id: Number;
+    name: string;
+    phno: string;
+    email: string;
+    product: string;
+    city: string;
+    country: string;
+    remarks: string;
+    expiry: string;
+  }
+
+  const viewData = () => {
+    const [dataz, setDatas] = useState([]);
+    useEffect(() => {
+      const fetchAllDatas = async () => {
+        try {
+          const res = await axios.get("http://localhost:8800/data");
+          setDatas(res.data);
+        } catch (err) {
+          console.log(err);
+        }
+      };
+      fetchAllDatas();
+    }, []);
+    return dataz;
+  };
+
   if (mode == "view") {
+    const datas = viewData();
     return (
       <div className="enclosure">
         {/* <form> */}
@@ -49,59 +92,30 @@ const CDMPage: React.FC<cdmProps> = ({ mode }) => {
                 <th>Remarks</th>
               </tr>
             </thead>
-            <tbody></tbody>
+            <tbody>
+              {datas.map((data: dataObj) => (
+                <tr key={data.id.toString()}>
+                  <td>{data.id.toString()}</td>
+                  <td>{data.name}</td>
+                  <td>{data.phno}</td>
+                  <td>{data.email}</td>
+                  <td>{data.product}</td>
+                  <td>{data.expiry}</td>
+                  <td>
+                    {data.city},{data.country}
+                  </td>
+                  <td>{data.remarks}</td>
+                </tr>
+              ))}
+            </tbody>
           </table>
         </div>
       </div>
     );
   } else if (mode == "add") {
-    return (
-      <div className="enclosure">
-        {/* <form> */}
-        <div className="left">
-          <label htmlFor="namea">Name:</label>
-          <input type="text" id="namea" />
-          <label htmlFor="phna">Ph.No:</label>
-          <input type="number" id="phna" />
-          <label htmlFor="emaila">Email: </label>
-          <input type="email" id="emaila" />
-          <label htmlFor="producta">Product:</label>
-          <input type="text" id="producta" />
-        </div>
-        <div className="right">
-          <label htmlFor="citya">City</label>
-          <input type="text" id="citya" />
-          <label htmlFor="countrya">Country:</label>
-          <input type="text" id="countrya" />
-          <label htmlFor="remarksa">Remarks:</label>
-          <textarea id="remarksa" cols={30} rows={1}></textarea>
-          <label htmlFor="expirya">Expiry:</label>
-          <input type="date" id="expirya" />
-        </div>
-        {/* </form> */}
-        <div className="btngrp">
-          <button id="submit">ADD</button>
-          {/* <button id="print">PRINT</button> */}
-        </div>
-        <div className="dataarea">
-          <table id="datatable">
-            <thead>
-              <tr>
-                <th>S.No</th>
-                <th>Name</th>
-                <th>Phone</th>
-                <th>Email</th>
-                <th>Product</th>
-                <th>Expiry</th>
-                <th>City</th>
-                <th>Remarks</th>
-              </tr>
-            </thead>
-            <tbody></tbody>
-          </table>
-        </div>
-      </div>
-    );
+    {
+      <AddData />;
+    }
   } else if (mode == "modify") {
     return (
       <div className="enclosure">

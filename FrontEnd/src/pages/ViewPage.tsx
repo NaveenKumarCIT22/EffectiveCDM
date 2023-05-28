@@ -2,6 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import CDMPage from "./CDMPage";
 import { useEffect } from "react";
+import ViewData from "../components/ViewData";
 
 const ViewPage = () => {
   const navigate = useNavigate();
@@ -15,11 +16,7 @@ const ViewPage = () => {
   return (
     <>
       <Header title="EffectiveCDM" mode="main" />
-      {sessionStorage.getItem("ActiveUsr") == null ? (
-        redirect()
-      ) : (
-        <CDMPage mode="view" />
-      )}
+      {sessionStorage.getItem("ActiveUsr") == null ? redirect() : <ViewData />}
     </>
   );
 };

@@ -8,6 +8,11 @@ const navStyle = {
   backgroundColor: "limegreen",
 };
 
+const actvStyle = {
+  textDecoration: "underline",
+  textColor: "goldenrod",
+};
+
 interface HeaderProps {
   title: string;
   mode: "landing" | "main" | "empty";
@@ -44,7 +49,7 @@ const Header: React.FC<HeaderProps> = ({ title, mode }) => {
             id="responsive-navbar-nav"
             className="justify-content-end"
           >
-            <Nav className="justify-content-end">
+            <Nav activeKey={location.pathname} className="justify-content-end">
               <Nav.Link href="/add">&nbsp;Add&nbsp;</Nav.Link>
               <Nav.Link href="/modify">&nbsp;Modify&nbsp;</Nav.Link>
               <Nav.Link href="/view">&nbsp;View&nbsp;</Nav.Link>

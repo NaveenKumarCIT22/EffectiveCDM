@@ -53,6 +53,47 @@ app.get("/usrslgninfo/:name", (req, res) => {
   });
 });
 
+app.post("/data", (req, res) => {
+  const q =
+    "INSERT INTO datatb(`name`, `phno`, `email`, `product`, `city`, `country`, `remarks`, `expiry`) VALUES (?)";
+
+  const values = [
+    req.body.name,
+    req.body.phno,
+    req.body.email,
+    req.body.product,
+    req.body.city,
+    req.body.country,
+    req.body.remarks,
+    req.body.expiry,
+  ];
+
+  db.query(q, [values], (err, data) => {
+    if (err) return res.send(err);
+    return res.json(data);
+  });
+});
+
+app.get("/data", (req, res) => {
+  const q =
+    "SELECT id, name, phno, email, product, city, country, remarks, DATE_FORMAT(expiry,'%d/%c/%Y') as expiry FROM datatb";
+  db.query(q, (err, data) => {
+    if (err) return res.json(err);
+    return res.json(data);
+  });
+});
+
+app.get("/data/:whrcond", (req, res) => {
+  const cond = req.params.whrcond;
+  const q =
+    "SELECT id, name, phno, email, product, city, country, remarks, DATE_FORMAT(expiry,'%d/%c/%Y') as expiry FROM datatb WHERE " +
+    cond;
+  db.query(q, (err, data) => {
+    if (err) return res.json(err);
+    return res.json(data);
+  });
+});
+
 app.listen(8800, () => {
   console.log("Connected to the Backend Server!");
 });

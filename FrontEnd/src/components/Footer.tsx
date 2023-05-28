@@ -46,7 +46,7 @@ export default function Footer() {
               floating
               className="m-1"
               style={{ backgroundColor: "#dd4b39" }}
-              href="naveenkumarm.aids2022@citchennai.net"
+              href="mailto:naveenkumarm.aids2022@citchennai.net"
               role="button"
             >
               <MDBIcon fab icon="google" />
@@ -76,7 +76,7 @@ export default function Footer() {
               floating
               className="m-1"
               style={{ backgroundColor: "#333333" }}
-              href="https://github.com/NaveenKumarCIT22/LearnBuddy"
+              href="https://github.com/NaveenKumarCIT22/EffectiveCDM"
               role="button"
             >
               <MDBIcon fab icon="github" />
