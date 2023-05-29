@@ -16,7 +16,12 @@ const ViewPage = () => {
   return (
     <>
       <Header title="EffectiveCDM" mode="main" />
-      {sessionStorage.getItem("ActiveUsr") == null ? redirect() : <ViewData />}
+      {sessionStorage.getItem("ActiveUsr") == null ? (
+        redirect()
+      ) : (
+        <ViewData />
+        // <CDMPage mode="view" />
+      )}
     </>
   );
 };

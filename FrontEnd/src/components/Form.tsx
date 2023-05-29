@@ -389,6 +389,14 @@ const Form: React.FC<frmProps> = ({ type }) => {
             disabled
             style={{ backgroundColor: "whitesmoke" }}
           />
+          <button
+            className="btn"
+            onClick={() => {
+              sessionStorage.removeItem("ActiveUsr");
+            }}
+          >
+            Logout
+          </button>
         </form>
       </>
     );

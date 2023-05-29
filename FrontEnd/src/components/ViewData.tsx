@@ -15,13 +15,13 @@ interface dataObj {
 }
 
 const ViewData = () => {
-  const [dataz, setDatas] = useState([]);
   const viewData = (cond = "") => {
+    var dataz = [];
     useEffect(() => {
       const fetchAllDatas = async () => {
         try {
           const res = await axios.get("http://localhost:8800/data");
-          setDatas(res.data);
+          dataz = res.data;
         } catch (err) {
           console.log(err);
         }
@@ -29,13 +29,14 @@ const ViewData = () => {
       const fetchFewDatas = async () => {
         try {
           const res = await axios.get("http://localhost:8800/data/" + cond);
-          setDatas(res.data);
+          dataz = res.data;
         } catch (err) {
           console.log(err);
         }
       };
-      cond == "" ? fetchAllDatas() : fetchFewDatas;
+      cond == "" ? fetchAllDatas() : fetchFewDatas();
     }, []);
+    console.log(dataz[0]);
     return dataz;
   };
 
@@ -75,29 +76,33 @@ const ViewData = () => {
       cond = cond.substr(0, cond.length - 5);
     }
     const datas = viewData(cond);
-    ReactDOM.createRoot(
-      document.getElementsByTagName("tbody")[0] as HTMLElement
-    ).render(
-      <>
-        {datas.map((data: dataObj) => (
-          <tr key={data.id.toString()}>
-            <td>{data.id.toString()}</td>
-            <td>{data.name}</td>
-            <td>{data.phno}</td>
-            <td>{data.email}</td>
-            <td>{data.product}</td>
-            <td>{data.expiry}</td>
-            <td>
-              {data.city},{data.country}
-            </td>
-            <td>{data.remarks}</td>
-          </tr>
-        ))}
-      </>
-    );
+    // console.log(datas);
+    datas.map((data: dataObj) => {
+      console.log(data);
+    });
+    // ReactDOM.createRoot(
+    //   document.getElementsByTagName("tbody")[0] as HTMLElement
+    // ).render(
+    //   <>
+    //     {datas.map((data: dataObj) => (
+    //       <tr key={data.id.toString()}>
+    //         <td>{data.id.toString()}</td>
+    //         <td>{data.name}</td>
+    //         <td>{data.phno}</td>
+    //         <td>{data.email}</td>
+    //         <td>{data.product}</td>
+    //         <td>{data.expiry}</td>
+    //         <td>
+    //           {data.city},{data.country}
+    //         </td>
+    //         <td>{data.remarks}</td>
+    //       </tr>
+    //     ))}
+    //   </>
+    // );
   };
 
-  const datas = viewData();
+  //   const datas = viewData();
   return (
     <div className="enclosure">
       <div className="left">

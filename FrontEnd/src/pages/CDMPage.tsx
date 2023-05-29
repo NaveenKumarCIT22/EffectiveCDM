@@ -49,7 +49,8 @@ const CDMPage: React.FC<cdmProps> = ({ mode }) => {
   };
 
   if (mode == "view") {
-    const datas = viewData();
+    var datas = viewData();
+    datas = viewData();
     return (
       <div className="enclosure">
         {/* <form> */}
