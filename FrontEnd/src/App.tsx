@@ -1,6 +1,7 @@
 // import { useState } from "react";
 import { Link, Route, Routes } from "react-router-dom";
 import "./App.css";
+import "./pages/CDMStyle.css";
 import AddPage from "./pages/AddPage";
 import LoginPage from "./pages/LoginPage";
 import Footer from "./components/Footer";

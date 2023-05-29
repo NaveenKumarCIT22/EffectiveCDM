@@ -1,6 +1,6 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
-import CDMPage from "./CDMPage";
+// import CDMPage from "./CDMPage";
 import { useEffect } from "react";
 import ViewData from "../components/ViewData";
 
