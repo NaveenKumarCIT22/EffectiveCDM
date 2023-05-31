@@ -68,10 +68,10 @@ const Form: React.FC<frmProps> = ({ type }) => {
       } else {
         setError(false);
         setErrorPrompt("Please enter all the fields.");
-        console.log(name, password);
+        // console.log(name, password);
         users.forEach((user: usrProps) => {
           if (name == user.name && password == user.password) {
-            console.log(user);
+            // console.log(user);
             setSubmitted(true);
             navigate("/");
             sessionStorage.setItem("ActiveUsr", name);

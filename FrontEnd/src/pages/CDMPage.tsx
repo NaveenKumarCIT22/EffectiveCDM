@@ -48,76 +48,72 @@ const CDMPage: React.FC<cdmProps> = ({ mode }) => {
     return dataz;
   };
 
-  if (mode == "view") {
-    var datas = viewData();
-    datas = viewData();
-    return (
-      <div className="enclosure">
-        {/* <form> */}
-        <div className="left">
-          <label htmlFor="namev">Name:</label>
-          <input type="text" id="namev" />
-          <label htmlFor="phnv">Ph.No:</label>
-          <input type="number" id="phnv" />
-          <label htmlFor="emailv">Email: </label>
-          <input type="email" id="emailv" />
-          <label htmlFor="productv">Product:</label>
-          <input type="text" id="productv" />
-        </div>
-        <div className="right">
-          <label htmlFor="cityv">City</label>
-          <input type="text" id="cityv" />
-          <label htmlFor="countryv">Country:</label>
-          <input type="text" id="countryv" />
-          <label htmlFor="remarksv">Remarks:</label>
-          <textarea id="remarksv" cols={30} rows={1}></textarea>
-          <label htmlFor="expiryv">Expiry:</label>
-          <input type="date" id="expiryv" />
-        </div>
-        {/* </form> */}
-        <div className="btngrp">
-          <button id="submit">SHOW</button>
-          <button id="print">PRINT</button>
-        </div>
-        <div className="dataarea">
-          <table id="datatable">
-            <thead>
-              <tr>
-                <th>S.No</th>
-                <th>Name</th>
-                <th>Phone</th>
-                <th>Email</th>
-                <th>Product</th>
-                <th>Expiry</th>
-                <th>City</th>
-                <th>Remarks</th>
-              </tr>
-            </thead>
-            <tbody>
-              {datas.map((data: dataObj) => (
-                <tr key={data.id.toString()}>
-                  <td>{data.id.toString()}</td>
-                  <td>{data.name}</td>
-                  <td>{data.phno}</td>
-                  <td>{data.email}</td>
-                  <td>{data.product}</td>
-                  <td>{data.expiry}</td>
-                  <td>
-                    {data.city},{data.country}
-                  </td>
-                  <td>{data.remarks}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
-    );
-  } else if (mode == "add") {
-    {
-      <AddData />;
-    }
-  } else if (mode == "modify") {
+  // if (mode == "view") {
+  //   var datas = viewData();
+  //   datas = viewData();
+  //   return (
+  //     <div className="enclosure">
+  //       {/* <form> */}
+  //       <div className="left">
+  //         <label htmlFor="namev">Name:</label>
+  //         <input type="text" id="namev" />
+  //         <label htmlFor="phnv">Ph.No:</label>
+  //         <input type="number" id="phnv" />
+  //         <label htmlFor="emailv">Email: </label>
+  //         <input type="email" id="emailv" />
+  //         <label htmlFor="productv">Product:</label>
+  //         <input type="text" id="productv" />
+  //       </div>
+  //       <div className="right">
+  //         <label htmlFor="cityv">City</label>
+  //         <input type="text" id="cityv" />
+  //         <label htmlFor="countryv">Country:</label>
+  //         <input type="text" id="countryv" />
+  //         <label htmlFor="remarksv">Remarks:</label>
+  //         <textarea id="remarksv" cols={30} rows={1}></textarea>
+  //         <label htmlFor="expiryv">Expiry:</label>
+  //         <input type="date" id="expiryv" />
+  //       </div>
+  //       {/* </form> */}
+  //       <div className="btngrp">
+  //         <button id="submit">SHOW</button>
+  //         <button id="print">PRINT</button>
+  //       </div>
+  //       <div className="dataarea">
+  //         <table id="datatable">
+  //           <thead>
+  //             <tr>
+  //               <th>S.No</th>
+  //               <th>Name</th>
+  //               <th>Phone</th>
+  //               <th>Email</th>
+  //               <th>Product</th>
+  //               <th>Expiry</th>
+  //               <th>City</th>
+  //               <th>Remarks</th>
+  //             </tr>
+  //           </thead>
+  //           <tbody>
+  //             {datas.map((data: dataObj) => (
+  //               <tr key={data.id.toString()}>
+  //                 <td>{data.id.toString()}</td>
+  //                 <td>{data.name}</td>
+  //                 <td>{data.phno}</td>
+  //                 <td>{data.email}</td>
+  //                 <td>{data.product}</td>
+  //                 <td>{data.expiry}</td>
+  //                 <td>
+  //                   {data.city},{data.country}
+  //                 </td>
+  //                 <td>{data.remarks}</td>
+  //               </tr>
+  //             ))}
+  //           </tbody>
+  //         </table>
+  //       </div>
+  //     </div>
+  //   );} else
+  if (mode == "modify") {
     return (
       <div className="enclosure">
         {/* <form> */}

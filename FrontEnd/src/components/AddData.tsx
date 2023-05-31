@@ -2,6 +2,7 @@ import axios from "axios";
 // import "react";
 import { useEffect, useState, MouseEvent, ChangeEvent } from "react";
 import ReactDOM from "react-dom/client";
+// import { strictSchema } from "../validationSchema.js";
 
 interface dataObj {
   id: Number;
@@ -15,21 +16,23 @@ interface dataObj {
   expiry: string;
 }
 
-const viewData = () => {
-  const [dataz, setDatas] = useState([]);
-  useEffect(() => {
-    const fetchAllDatas = async () => {
-      try {
-        const res = await axios.get("http://localhost:8800/data");
-        setDatas(res.data);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    fetchAllDatas();
-  }, []);
-  return dataz;
-};
+const usr = sessionStorage.getItem("ActiveUsr");
+
+// const viewData = () => {
+//   const [dataz, setDatas] = useState([]);
+//   useEffect(() => {
+//     const fetchAllDatas = async () => {
+//       try {
+//         const res = await axios.get("http://localhost:8800/data");
+//         setDatas(res.data);
+//       } catch (err) {
+//         console.log(err);
+//       }
+//     };
+//     fetchAllDatas();
+//   }, []);
+//   return dataz;
+// };
 
 const AddData = () => {
   const [data, setData] = useState({
@@ -43,6 +46,7 @@ const AddData = () => {
     expiry: "",
   });
   const [error, setError] = useState(false);
+  const [actv, setActv] = useState(false);
 
   const handleChange = (e: ChangeEvent) => {
     setData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -51,6 +55,7 @@ const AddData = () => {
   const handleClick = async (e: MouseEvent) => {
     e.preventDefault();
     console.log(data);
+    setActv(true);
     if (
       data.name == "" ||
       data.phno == "" ||
@@ -64,23 +69,29 @@ const AddData = () => {
         "All fields other than 'remarks' are necessary, so please fill them out!!!"
       );
       setError(true);
+    } else if (!data.email.includes("@") || !data.email.includes(".")) {
+      alert("Enter a proper email please");
+      setError(true);
+    } else if (data.phno.length != 10) {
+      alert("Enter a proper 10-digit phone number");
+      setError(true);
     } else {
       try {
-        await axios.post("http://localhost:8800/data", data);
         setError(false);
+        const dda = { ...data, user: usr };
+        await axios.post("http://localhost:8800/data", dda);
       } catch (err) {
         console.log(err);
         setError(true);
       }
       //   const datas = viewData();
-      ReactDOM.createRoot(
-        document.getElementsByTagName("tbody")[0] as HTMLElement
-      ).render(
-        <tr>
-          {" "}
-          {error ? "Something went wrong!" : "Data Successfully Added !!!"}{" "}
-        </tr>
-      );
+      // ReactDOM.createRoot(
+      //   document.getElementsByTagName("tbody")[0] as HTMLElement
+      // ).render(
+      //   <tr>
+      //     {error ? "Something went wrong!" : "Data Successfully Added !!!"}
+      //   </tr>
+      // );
     }
   };
 
@@ -147,7 +158,14 @@ const AddData = () => {
       </div>
       <div className="dataarea">
         <table id="datatable">
-          <tbody></tbody>
+          <tbody>
+            <tr>
+              {actv &&
+                (error
+                  ? "Something went wrong!"
+                  : "Data Successfully Added !!!")}
+            </tr>
+          </tbody>
         </table>
       </div>
     </div>

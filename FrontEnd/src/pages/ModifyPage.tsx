@@ -1,7 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
-import CDMPage from "./CDMPage";
+// import CDMPage from "./CDMPage";
 import { useEffect } from "react";
+import ModifyData from "../components/ModifyData";
 
 const ModifyPage = () => {
   const navigate = useNavigate();
@@ -18,7 +19,8 @@ const ModifyPage = () => {
       {sessionStorage.getItem("ActiveUsr") == null ? (
         redirect()
       ) : (
-        <CDMPage mode="modify" />
+        // <CDMPage mode="modify" />
+        <ModifyData />
       )}
     </>
   );
